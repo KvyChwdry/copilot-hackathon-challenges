@@ -1,0 +1,57 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Define the Grand Clock Tower time
+        TimeSpan grandClockTowerTime = new TimeSpan(15, 0, 0);
+
+        // Clock times around the town
+        List<TimeSpan> clockTimes = GetClockTimes();
+
+        // Calculate the time differences
+        List<int> timeDifferences = CalculateTimeDifferences(clockTimes, grandClockTowerTime);
+
+        // Output the time differences
+        DisplayTimeDifferences(timeDifferences);
+    }
+
+    // Method to get the clock times around the town
+    static List<TimeSpan> GetClockTimes()
+    {
+        return new List<TimeSpan>
+        {
+            new TimeSpan(14, 45, 0), // Clock 1
+            new TimeSpan(15, 5, 0),  // Clock 2
+            new TimeSpan(15, 0, 0),  // Clock 3
+            new TimeSpan(14, 40, 0)  // Clock 4
+        };
+    }
+
+    // Method to calculate the time differences in minutes
+    static List<int> CalculateTimeDifferences(List<TimeSpan> clockTimes, TimeSpan grandClockTowerTime)
+    {
+        List<int> timeDifferences = new List<int>();
+
+        foreach (TimeSpan clockTime in clockTimes)
+        {
+            int differenceInMinutes = (int)(clockTime - grandClockTowerTime).TotalMinutes;
+            timeDifferences.Add(differenceInMinutes);
+        }
+
+        return timeDifferences;
+    }
+
+    // Method to display the time differences
+    static void DisplayTimeDifferences(List<int> timeDifferences)
+    {
+        Console.WriteLine("Time differences from Grand Clock Tower (in minutes):");
+
+        for (int i = 0; i < timeDifferences.Count; i++)
+        {
+            Console.WriteLine($"Clock {i + 1}: {timeDifferences[i]} minutes");
+        }
+    }
+}
